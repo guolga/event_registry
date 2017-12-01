@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Event</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}"/> 
+</head>
+<body>
+	<h1>Edit Event</h1>
+	<div>
+		<form th:object="${event}" th:action="@{../save}" action="#" method="post">
+		  	<input type="hidden" th:field="*{id}" class="form-control" />
+		  	
+		  	<input type="text" th:field="*{title}" />
+		  	<input type="date" th:field="*{date}" />
+			<input type="time" th:field="*{time}" />
+			<input type="text" th:field="*{location}" />
+			<select id="typlist" th:field="*{type}" class="form-control">
+       		<option th:each="type: ${type}" th:value="${type.typeid}" th:text="${type.type}"></option>
+    		</select>
+    		<input type="text" th:field="*{price}" />
+    		<input type="text" th:field="*{details}" />
+						
+			<input type="submit" class="btn btn-success" value="Save"></input>
+		</form>
+	</div>
+</body>
+</html>
+
+
