@@ -3,26 +3,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}"/> 
    	<title>Adding Event</title>
    </head>
 <body>
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header"><a class="navbar-brand">GUOLGA EVENTS</a></div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Event list</a></li>
-      <li><a href="#">Bookings</a></li>
-      <li><a href="#">Users</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
-    </ul>
-  </div>
-</nav>
-  
-<div class="container" style="background-color:#e6e6e6">
+<div class="container">
   <h1>Add Event</h1>
 		<form th:object="${event}" th:action="@{save}" action="#" method="post">
 		  	<label for="title">Title</label>

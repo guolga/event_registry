@@ -7,7 +7,7 @@
 </head>
 <body>
 	<h1>Edit Event</h1>
-	<div>
+	<div class="container">
 		<form th:object="${event}" th:action="@{../save}" action="#" method="post">
 		  	<input type="hidden" th:field="*{id}" class="form-control" />
 		  	

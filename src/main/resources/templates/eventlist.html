@@ -1,68 +1,64 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}"/> 
-    <title>Event List</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"
+	th:href="@{css/bootstrap.min.css}" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>Event List</title>
 </head>
 <body>
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header"><a class="navbar-brand">GUOLGA EVENTS</a></div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Event list</a></li>
-      <li><a href="#">Bookings</a></li>
-      <li><a href="#">Users</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li th:inline="text"><a href="#"><span class="glyphicon glyphicon-user"></span> [[${#httpServletRequest.remoteUser}]]</a></li>
-      <li ><a href="#"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
-    </ul>
-  </div>
-</nav>
 	<div class="col-md-4">
-		<h1>Events</h1>	
+		<h1>Events</h1>
 	</div>
-	
+
 	<div class="col-md-4">
-		<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+		<h3 th:inline="text">Welcome
+			[[${#httpServletRequest.remoteUser}]]</h3>
 	</div>
-	
-	<div class="col-md-4" style="padding:20px">
+
+	<div class="col-md-4" style="padding: 20px">
 		<form th:action="@{/logout}" method="post">
-			<input type="submit" value="Sign Out" class="btn btn-danger"/>
+			<input type="submit" value="Sign Out" class="btn btn-danger" />
 		</form>
 	</div>
-	
-    <table class="table table-striped">
-		<tr>
-		    <th>Title</th>
-		    <th>Date</th>
-		    <th>Time</th>
-		    <th>Location</th>
-		    <th>Type</th>
-		    <th>Ticket Price</th>
-		    <th>Details</th>
-		   	<th sec:authorize="hasAuthority('ADMIN')"> </th>
-		   	<th sec:authorize="hasAuthority('USER')"> </th>
-		    <th></th>
-		     <th></th>
-		</tr>  
-    	<tr th:each = "event : ${event}">
-    		<td th:text="${event.title}"></td>
-    		<td th:text="${event.date}"></td>
-    		<td th:text="${event.time}"></td>
-    		<td th:text="${event.location}"></td>
-    		<td th:text="${event.type.type}"></td> 
-    		<td th:text="${event.price}"></td>
-    		<td th:text="${event.details}"></td>
-    		<td sec:authorize="hasAuthority('USER')"><a th:href="@{/book/{id}(id=${event.id})}">Book Tickets</a></td> 
-    		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${event.id})}">Edit</a></td> 
-    		<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-danger" th:href="@{/delete/{id}(id=${event.id})}">Delete</a></td>  
- 		</tr>
-     </table>
-	 <a class="btn btn-success" href="/add">Add Event</a>    	
+	<div class="container">
+		<table class="table table-striped">
+			<tr>
+				<th>Title</th>
+				<th>Date</th>
+				<th>Time</th>
+				<th>Location</th>
+				<th>Type</th>
+				<th>Ticket Price</th>
+				<th>Details</th>
+				<th sec:authorize="hasAuthority('ADMIN')"></th>
+				<th sec:authorize="hasAuthority('USER')"></th>
+				<th></th>
+
+			</tr>
+			<tr th:each="event : ${event}">
+				<td th:text="${event.title}"></td>
+				<td th:text="${event.date}"></td>
+				<td th:text="${event.time}"></td>
+				<td th:text="${event.location}"></td>
+				<td th:text="${event.type.type}"></td>
+				<td th:text="${event.price}"></td>
+				<td th:text="${event.details}"></td>
+				<td sec:authorize="hasAuthority('USER')"><a
+					th:href="@{/book/{id}(id=${event.id})}">Book Tickets</a></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a
+					th:href="@{/edit/{id}(id=${event.id})}">Edit</a></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a
+					class="btn btn-danger" th:href="@{/delete/{id}(id=${event.id})}">Delete</a></td>
+			</tr>
+		</table>
+		<a class="btn btn-success" href="/add">Add Event</a>
+	</div>
 </body>
 </html>

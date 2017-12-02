@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import fi.hh.guolgaproject.EventRegistry.domain.EventRepository;
 import fi.hh.guolgaproject.EventRegistry.domain.TypeRepository;
+import fi.hh.guolgaproject.EventRegistry.domain.User;
 import fi.hh.guolgaproject.EventRegistry.domain.UserRepository;
 import fi.hh.guolgaproject.EventRegistry.domain.Event;
 
@@ -32,6 +33,11 @@ public class EventController {
         return "login";
    
 }
+	@RequestMapping(value="/signup")
+	public String sigupForm(Model model){
+		model.addAttribute("user", new User());
+		return "signup";
+	}
 	
 	@RequestMapping(value="/eventlist")
     public String eventList(Model model) {	
