@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import fi.hh.guolgaproject.EventRegistry.domain.EventRepository;
 import fi.hh.guolgaproject.EventRegistry.domain.TypeRepository;
+import fi.hh.guolgaproject.EventRegistry.domain.UserRepository;
 import fi.hh.guolgaproject.EventRegistry.domain.Event;
 
 
@@ -23,10 +24,13 @@ public class EventController {
 	@Autowired
 	private TypeRepository drepository;
 	
+	@Autowired UserRepository urepository;
+	
+	
 	@RequestMapping(value="/login")
     public String login() {	
         return "login";
-      
+   
 }
 	
 	@RequestMapping(value="/eventlist")
