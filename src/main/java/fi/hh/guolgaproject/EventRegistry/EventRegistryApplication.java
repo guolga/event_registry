@@ -36,11 +36,12 @@ public class EventRegistryApplication {
 			drepository.save(new Type("Concert"));
 			drepository.save(new Type("Other"));
 			
+			
 			repository.save(new Event("Test Event 1", "05.02.2018", "19:00", "National Opera Hall", 75.99, "Performance by Olga", drepository.findByType("Music").get(0)));
 			repository.save(new Event("Test Event 2", "07.03.2018", "18:00", "Somewhere", 11.50, "Performance by Dignity", drepository.findByType("Theatre").get(0)));
 			repository.save(new Event("Test Event 3", "25.01.2018", "20:30", "Haaga-Helia", 25.99, "Performance by Anastasia", drepository.findByType("Dance").get(0)));
 			
-			
+			/*
 			User user1 = new User("admin", "Admin",  "Adminovich", "$2a$06$agdWTMxFom/Fj0o5sRAbOu5w57OjSRRNT9KnG.D.jnDG4yhs3A8PO", "admin@events.fi", "ADMIN");
 			User user2 = new User("user", "Olga", "Guscina", "$2a$10$9cwBr0ww4FbBJW9ac7aiHO80GRstjGCKCb36gqa0KJrQpVHLsmze.", "user@gmail.com", "USER");
 
@@ -52,6 +53,7 @@ public class EventRegistryApplication {
 			for (Event event: repository.findAll()){
 				log.info(event.toString());
 			}
+			*/
 		};
 	}
 	
