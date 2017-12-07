@@ -1,12 +1,37 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <title>Edit Event</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}"/> 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"
+	th:href="@{css/bootstrap.min.css}" />
+	<title>Edit Event</title>
 </head>
 <body>
-	<h1>Edit Event</h1>
+<nav class="navbar navbar-inverse bg-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">GUOLGA EVENTS</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active"><a th:href="@{/eventlist}">Events</a></li>
+				<li><a th:href="@{/userlist}"
+					sec:authorize="hasAuthority('ADMIN')">Users</a></li>
+			</ul>
+			<div class="navbar-text">
+				<span th:inline="text">Signed in as
+					[[${#httpServletRequest.remoteUser}]]</span>
+			</div>
+			<div class="navbar-text navbar-right">
+				<form th:action="@{/logout}" method="post">
+					<input type="submit" value="Sign Out" class="btn btn-danger"></input>
+				</form>
+			</div>
+
+		</div>
+	</nav>
+	<h1>Edit Event</h1><br />
 	<div class="container">
 		<form th:object="${event}" th:action="@{../save}" action="#" method="post">
 		  	<input type="hidden" th:field="*{id}" class="form-control" />

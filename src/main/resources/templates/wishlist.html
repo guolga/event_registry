@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"
+	th:href="@{css/bootstrap.min.css}" />
+<title>Wish List</title>
+</head>
+<body>
+<h1 th:inline="text">[[${#httpServletRequest.remoteUser}]]'s Wish List</h1>
+
+
+<p>Yes</p>
+
+<div class="container">
+		<table class="table table-striped">
+			<tr>
+				<th>Title</th>
+				<th>Date</th>
+				<th>Time</th>
+				<th>Location</th>
+				<th>Type</th>
+				<th>Ticket Price</th>
+				<th>Details</th>
+				<th sec:authorize="hasAuthority('USER')"></th>
+
+			</tr>
+			<tr th:each="wish : ${wish}">
+				<td th:text="${wish.wishtitle}"></td>
+				<td th:text="${wish.wishdate}"></td>
+				<td th:text="${wish.wishtime}"></td>
+				<td th:text="${wish.wishlocation}"></td>
+				<td th:text="${wish.wishtype}"></td>
+				<td th:text="${wish.wishprice}"></td>
+				<td th:text="${wish.wishdetails}"></td>
+				<td sec:authorize="hasAuthority('USER')"><a
+					class="btn btn-danger" th:href="@{/remove/{id}(id=${event.id})}">Remove from Wish List</a></td>
+			</tr>
+		</table>
+	</div>
+	
+</body>
+</html>

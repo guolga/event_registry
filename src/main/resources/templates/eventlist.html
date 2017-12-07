@@ -4,8 +4,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"
-	th:href="@{css/bootstrap.min.css}" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
@@ -13,22 +13,36 @@
 <title>Event List</title>
 </head>
 <body>
-	<div class="col-md-4">
-		<h1>Events</h1>
-	</div>
+	<nav class="navbar navbar-inverse bg-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">GUOLGA EVENTS</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active"><a th:href="@{/eventlist}">Events</a></li>
+				<li><a th:href="@{/userlist}"
+					sec:authorize="hasAuthority('ADMIN')">Users</a></li>
+			</ul>
+			<div class="navbar-text">
+				<span th:inline="text">Signed in as
+					[[${#httpServletRequest.remoteUser}]]</span>
+			</div>
+			<div class="navbar-text navbar-right">
+				<form th:action="@{/logout}" method="post">
+					<input type="submit" value="Sign Out" class="btn btn-danger"></input>
+				</form>
+			</div>
 
-	<div class="col-md-4">
-		<h3 th:inline="text">Welcome
-			[[${#httpServletRequest.remoteUser}]]</h3>
-	</div>
 
-	<div class="col-md-4" style="padding: 20px">
-		<form th:action="@{/logout}" method="post">
-			<input type="submit" value="Sign Out" class="btn btn-danger" />
-		</form>
-	</div>
+		</div>
+	</nav>
+
+
 	<div class="container">
-		<table class="table table-striped">
+		<h1 class="text-center">Events</h1>
+		<br /> <input class="form-control" id="myInput" type="text"
+			placeholder="Search.."></input> <br />
+		<table class="table table-striped table-hover">
 			<tr>
 				<th>Title</th>
 				<th>Date</th>
@@ -37,28 +51,56 @@
 				<th>Type</th>
 				<th>Ticket Price</th>
 				<th>Details</th>
-				<th sec:authorize="hasAuthority('ADMIN')"></th>
+				<th sec:authorize="hasAuthority('ADMIN')">Edit</th>
+				<th sec:authorize="hasAuthority('ADMIN')">Delete</th>
 				<th sec:authorize="hasAuthority('USER')"></th>
-				<th></th>
 
 			</tr>
-			<tr th:each="event : ${event}">
-				<td th:text="${event.title}"></td>
-				<td th:text="${event.date}"></td>
-				<td th:text="${event.time}"></td>
-				<td th:text="${event.location}"></td>
-				<td th:text="${event.type.type}"></td>
-				<td th:text="${event.price}"></td>
-				<td th:text="${event.details}"></td>
-				<td sec:authorize="hasAuthority('USER')"><a
-					th:href="@{/book/{id}(id=${event.id})}">Book Tickets</a></td>
-				<td sec:authorize="hasAuthority('ADMIN')"><a
-					th:href="@{/edit/{id}(id=${event.id})}">Edit</a></td>
-				<td sec:authorize="hasAuthority('ADMIN')"><a
-					class="btn btn-danger" th:href="@{/delete/{id}(id=${event.id})}">Delete</a></td>
-			</tr>
+			<tbody id="myTable">
+
+				<tr th:each="event : ${event}">
+					<td th:text="${event.title}"></td>
+					<td th:text="${event.date}"></td>
+					<td th:text="${event.time}"></td>
+					<td th:text="${event.location}"></td>
+					<td th:text="${event.type.type}"></td>
+					<td th:text="${event.price}"></td>
+					<td th:text="${event.details}"></td>
+					<td sec:authorize="hasAuthority('ADMIN')"><a
+						th:href="@{/edit/{id}(id=${event.id})}">Edit</a></td>
+					<td sec:authorize="hasAuthority('ADMIN')"><a
+						class="btn btn-danger" th:href="@{/delete/{id}(id=${event.id})}">Delete</a></td>
+					<td sec:authorize="hasAuthority('USER')"><a
+						class="btn btn/primary" th:href="@{/addtowish/{id}(id=${event.id})}">Add to Wish list</a></td>
+				</tr>
+			</tbody>
 		</table>
 		<a class="btn btn-success" href="/add">Add Event</a>
 	</div>
+	<script>
+		$(document)
+				.ready(
+						function() {
+							$("#myInput")
+									.on(
+											"keyup",
+											function() {
+												var value = $(this).val()
+														.toLowerCase();
+												$("#myTable tr")
+														.filter(
+																function() {
+																	$(this)
+																			.toggle(
+																					$(
+																							this)
+																							.text()
+																							.toLowerCase()
+																							.indexOf(
+																									value) > -1)
+																});
+											});
+						});
+	</script>
 </body>
 </html>

@@ -25,6 +25,7 @@ public class EventController {
 	@Autowired
 	private TypeRepository drepository;
 	
+		
 	@Autowired UserRepository urepository;
 	
 	
@@ -39,11 +40,23 @@ public class EventController {
 		return "signup";
 	}
 	
+	 @RequestMapping(value = "/adduser", method = RequestMethod.POST)
+	    public String adduser(User user){
+	        urepository.save(user);
+	        return "redirect:login";
+	    }
+	
 	@RequestMapping(value="/eventlist")
     public String eventList(Model model) {	
         model.addAttribute("event", repository.findAll());
         return "eventlist";
     }
+	
+	@RequestMapping(value="/userlist")
+    public String userList(Model model) {	
+        model.addAttribute("user", urepository.findAll());
+        return "userlist";
+	}
 	
 	@RequestMapping(value = "/add")
 	    public String addEvent(Model model){
@@ -56,8 +69,9 @@ public class EventController {
 	    public String save(Event event){
 	        repository.save(event);
 	        return "redirect:eventlist";
-	    }    
-
+	    }
+	 
+	 
 	 @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	    public String deleteEvent(@PathVariable("id") Long id, Model model) {
 	    	repository.delete(id);
@@ -72,13 +86,7 @@ public class EventController {
 	        return "editevent"; 
 	    }   
 	 
-	 @RequestMapping(value="/book/{id}")
-	 	public String bookEvent(@PathVariable("id") Long id, Model model){
-		 model.addAttribute("event", repository.findOne(id));
-		 
-		 return "bookevent";
-	 }
-	    
+ 
 	// RESTful service to get all events
 	 @RequestMapping(value="/events", method = RequestMethod.GET)
 	 public @ResponseBody List<Event> eventListRest() {	

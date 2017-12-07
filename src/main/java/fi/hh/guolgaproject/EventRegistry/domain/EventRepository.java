@@ -7,4 +7,6 @@ import fi.hh.guolgaproject.EventRegistry.domain.Event;
 public interface EventRepository extends CrudRepository <Event, Long> {
 
 	List<Event> findByTitle(String title);
-}
+
+	
+	}
