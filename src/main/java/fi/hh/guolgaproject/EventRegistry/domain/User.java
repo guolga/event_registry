@@ -30,6 +30,7 @@ public class User {
 	    @Column(name = "role", nullable = false)
 	    private String role="USER";
 	    
+	    //constructor
 	    public User() {}
 
 	    public User(String username, String firstname, String surname, String passwordHash, String email, String role){
@@ -42,7 +43,8 @@ public class User {
 			this.role = role;
 	    	
 	  	    }
-
+	    
+	    //getters and setters
 		public Long getId() {
 			return id;
 		}

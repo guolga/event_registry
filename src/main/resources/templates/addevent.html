@@ -3,63 +3,65 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"
-	th:href="@{css/bootstrap.min.css}" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 <title>Adding Event</title>
 </head>
 <body>
+
+	<!-- Navigation Bar -->
 	<nav class="navbar navbar-inverse bg-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">GUOLGA EVENTS</a>
+			<a class="navbar-brand" href="#">GUOLGA EVENTS</a>
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="active"><a th:href="@{/eventlist}">Events</a></li>
-				<li><a th:href="@{/userlist}"
-					sec:authorize="hasAuthority('ADMIN')">Users</a></li>
+				<li><a th:href="@{/userlist}" sec:authorize="hasAuthority('ADMIN')">Users</a></li>
 			</ul>
 			<div class="navbar-text">
-				<span th:inline="text">Signed in as
-					[[${#httpServletRequest.remoteUser}]]</span>
+				<span th:inline="text">Signed in as [[${#httpServletRequest.remoteUser}]]</span>
 			</div>
 			<div class="navbar-text navbar-right">
 				<form th:action="@{/logout}" method="post">
 					<input type="submit" value="Sign Out" class="btn btn-danger"></input>
 				</form>
 			</div>
-
 		</div>
 	</nav>
 
+	<!-- Input form -->
 	<div class="container">
 		<h2>Add Event</h2><br />
-
-		<form class="form-horizontal" th:object="${event}" th:action="@{save}"
-			action="#" method="post">
+		<form class="form-horizontal" th:object="${event}" th:action="@{../save}" action="#" method="post">
+		
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="title">Title:</label>
 				<div class="col-sm-10">
 					<input type="text" id="title" th:field="*{title}" />
 				</div>
 			</div>
+			
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="author">Date:</label>
 				<div class="col-sm-10">
 					<input type="date" id="date" th:field="*{date}" />
 				</div>
 			</div>
+			
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="time">Time:</label>
 				<div class="col-sm-10">
 					<input type="time" th:field="*{time}" />
 				</div>
 			</div>
+			
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="location">Location:</label>
 				<div class="col-sm-10">
 					<input type="text" th:field="*{location}" />
 				</div>
 			</div>
+			
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="typlist">Type:</label>
 				<div class="col-sm-10">
@@ -69,18 +71,22 @@
 					</select>
 				</div>
 			</div>
+			
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="price">Price:</label>
 				<div class="col-sm-10">
 					<input type="text" th:field="*{price}" />
 				</div>
 			</div>
+			
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="details">Details:</label>
 				<div class="col-sm-10">
 					<input type="text" th:field="*{details}" />
 				</div>
 			</div>
+			
+			<!-- Button to save event -->
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<input type="submit" value="Save" class="btn btn-success"></input>

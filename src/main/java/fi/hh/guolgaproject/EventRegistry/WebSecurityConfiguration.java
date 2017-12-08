@@ -20,12 +20,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	 private UserDetailServImpl userDetailsService;	
 	
 	@Override
+	//method for defining secure URL paths and path from login form
 	 protected void configure(HttpSecurity http) throws Exception {
         http
         .authorizeRequests().antMatchers("/css/**").permitAll() 
         .and()
         .authorizeRequests()
-        .antMatchers("/", "/add", "/save", "/eventlist", "/userlist", "/login", "/signup", "/delete/{id}").permitAll()
+        .antMatchers("/", "/login", "/signup").permitAll()
           .anyRequest().authenticated()
           .and()
       .formLogin()
@@ -37,6 +38,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
           .permitAll();
     }
 	
+	//configure authentication, users for testing
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());

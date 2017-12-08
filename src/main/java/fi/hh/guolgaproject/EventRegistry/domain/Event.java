@@ -12,7 +12,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Event  {
 	
+	//create id column of the table
 	@Id
+	//generate unique primary key for entity
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private String title;
@@ -22,10 +24,16 @@ public class Event  {
 	private double price;
 	private String details;
 	
+	/*Many to one relationship between Event and Type,
+	 *  event can have one type, 
+	 *  and same type can belong to different events
+	 */
 	@ManyToOne
 	@JsonIgnore
     @JoinColumn(name = "typeid")
     private Type type;	
+	
+	//constructor
 	
 	public Event() {}
 	
@@ -41,6 +49,7 @@ public class Event  {
 		
 	}
 
+	//getters and setters
 	public Long getId() {
 		return id;
 	}
@@ -105,6 +114,7 @@ public class Event  {
 		this.type = type;
 	}
 
+	//toString method
 	@Override
 	public String toString() {
 		if (this.type != null)

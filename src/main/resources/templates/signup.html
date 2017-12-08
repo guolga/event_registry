@@ -1,80 +1,74 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"
-	th:href="@{css/bootstrap.min.css}" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 <title>Sign Up Form</title>
 </head>
 <body>
-	<div id="signupbox" style="margin-top: 50px"
-		class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+
+	<!-- Sign up form -->
+	<div id="signupbox" style="margin-top: 50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 		<div class="panel panel-info">
+		
 			<div class="panel-heading">
 				<div class="panel-title"><a href="@{/signup}">Sign Up</a></div>
-
 			</div>
+			
 			<div class="panel-body">
 				<form th:object="${user}" th:action="@{adduser}" action="#" method="post" id="signupform" class="form-horizontal">
-
 					<div th:if="${param.error}" id="signupalert" class="alert alert-danger">Please, enter all required information				
 					</div>
 				
 					<div class="form-group">
 						<label class="col-md-3 control-label">Username</label>
 						<div class="col-md-9">
-							<input type="text" class="form-control" name="username"
-								placeholder="Username" th:field="*{username}"></input>
+							<input type="text" class="form-control" name="username" placeholder="Username" th:field="*{username}"></input>
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label class="col-md-3 control-label">First Name</label>
 						<div class="col-md-9">
-							<input type="text" class="form-control" name="firstname"
-								placeholder="First Name" th:field="*{firstname}"></input>
+							<input type="text" class="form-control" name="firstname" placeholder="First Name" th:field="*{firstname}"></input>
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label class="col-md-3 control-label">Surname</label>
 						<div class="col-md-9">
-							<input type="text" class="form-control" name="surname"
-								placeholder="Surname" th:field="*{surname}"></input>
+							<input type="text" class="form-control" name="surname" placeholder="Surname" th:field="*{surname}"></input>
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label class="col-md-3 control-label">Email</label>
 						<div class="col-md-9">
-							<input type="text" class="form-control" name="email"
-								placeholder="Email Address" th:field="*{email}"></input>
+							<input type="text" class="form-control" name="email" placeholder="Email Address" th:field="*{email}"></input>
 						</div>
 					</div>
+					
 					<div class="form-group">
 						<label class="col-md-3 control-label">Password</label>
 						<div class="col-md-9">
-							<input type="password" class="form-control" name="password"
-								placeholder="Password" th:field="*{passwordHash}"></input>
+							<input type="password" class="form-control" name="password" placeholder="Password" th:field="*{passwordHash}"></input>
 						</div>
 					</div>
+					
 					<input type="hidden" class="form-control" id="role"  th:field="*{role}"  th:value="USER" />
+					<!-- Submit button -->
 					<input type="submit" value="Sign Up" class="btn btn-info"></input>
 					
 					</form>
 					
 					<div class="form-group">
-						<!-- Button -->
 						<div class="col-md-offset-3 col-md-9">
 						</div>
 					</div>
-
-					
+				
 			</div>
 		</div>
-
 	</div>
 
 </body>

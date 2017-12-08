@@ -12,7 +12,9 @@ import javax.persistence.OneToMany;
 @Entity
 public class Type {
 	
+	//create id column of the table
 	@Id
+	//generate unique primary key for entity
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private Long typeid;
 	private String type;
@@ -20,6 +22,7 @@ public class Type {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "type")
 	private List <Event> event;
 	
+	//constructor
 	public Type() {}
 	
 	public Type(String type) {
@@ -27,6 +30,7 @@ public class Type {
 		this.type = type;
 	}
 
+	//getters and setters
 	public Long getTypeid() {
 		return typeid;
 	}
@@ -51,6 +55,7 @@ public class Type {
 		this.event = event;
 	}
 
+	//toString method
 	@Override
 	public String toString() {
 		return "Type [typeid=" + typeid + ", type=" + type + "]";

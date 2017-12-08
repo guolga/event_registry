@@ -1,16 +1,16 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>User List</title>
 </head>
 <body>
+
+	<!-- Navigation Bar -->
 	<nav class="navbar navbar-inverse bg-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -21,8 +21,7 @@
 				<li class="active"><a th:href="@{/userlist}">Users</a></li>
 			</ul>
 			<div class="navbar-text">
-				<span th:inline="text">Signed in as
-					[[${#httpServletRequest.remoteUser}]]</span>
+				<span th:inline="text">Signed in as [[${#httpServletRequest.remoteUser}]]</span>
 			</div>
 			<div class="navbar-text navbar-right">
 				<form th:action="@{/logout}" method="post">
@@ -34,9 +33,10 @@
 
 
 	<div class="container">
-		<h1 class="text-center">Users</h1><br />
-		<input class="form-control" id="myInput" type="text"
-			placeholder="Search.."></input> <br />
+		<h1 class="text-center">Users</h1><br/>
+		<input class="form-control" id="myInput" type="text" placeholder="Search.."></input> <br />
+				
+		<!-- Table displaying user list -->
 		<table class="table table-striped">
 			<tr>
 				<th>Username</th>
@@ -53,34 +53,13 @@
 				<td th:text="${user.email}"></td>
 				<td th:text="${user.role}"></td>
 			</tr>
-						</tbody>
-			
+			</tbody>
 		</table>
 	</div>
-		<script>
-		$(document)
-				.ready(
-						function() {
-							$("#myInput")
-									.on(
-											"keyup",
-											function() {
-												var value = $(this).val()
-														.toLowerCase();
-												$("#myTable tr")
-														.filter(
-																function() {
-																	$(this)
-																			.toggle(
-																					$(
-																							this)
-																							.text()
-																							.toLowerCase()
-																							.indexOf(
-																									value) > -1)
-																});
-											});
-						});
+		<!-- Search / Filtering -->
+	<script>$(document).ready(function() {$("#myInput").on("keyup",function() {var value = $(this).val().toLowerCase();$("#myTable tr").filter(
+																function() {$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)});});});
 	</script>
+	
 </body>
 </html>
